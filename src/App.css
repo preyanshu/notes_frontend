@@ -80,7 +80,7 @@ lottie-player{
   margin-top: 5.5px;
 }
 .login{
-  margin-top: 100.5px;
+  margin-top: -10px;
   width: 40vw;
   min-width: 300px;
 
@@ -92,4 +92,9 @@ lottie-player{
 *{
   margin: 0px;
   padding: 0px;
+}
+.flex2{
+  margin-top: 15px;
+  flex-wrap: wrap;
+
 }

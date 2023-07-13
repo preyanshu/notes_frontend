@@ -39,7 +39,12 @@ const Login = (props) => {
     }
 
     return (
-        <div className='login container'>
+        
+                <div className="flex1 flex2">
+                    <div style={{height: 300 + 'px',width : 300+"px"}}>
+         <lottie-player src="https://lottie.host/1c422d67-8e54-414d-8df9-6bcf6e3c0f40/FLyI5miodA.json"  speed="1" style={{height: 300+'px',width : 300+"px"}} direction="1" mode="normal" loop autoplay></lottie-player>
+         </div>
+                    <div className='login container'>
             <h1 className='text-center pb-3'>Login</h1>
             <form  onSubmit={handleSubmit}>
                 <div className="mb-3">
@@ -52,9 +57,13 @@ const Login = (props) => {
                     <input type="password" className="form-control" value={credentials.password} onChange={onChange} name="password" id="password" />
                 </div>
 
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary mb-3 mt-3">Submit</button>
             </form>
         </div>
+            
+                
+               </div>                
+         
     )
 }
 
