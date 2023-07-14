@@ -4,12 +4,12 @@ import noteContext from "../context/notes/noteContext"
 
 const Noteitem = (props) => {
     const context = useContext(noteContext);
-    const { deleteNote,post1 } = context;
+    const  { deleteNote,post1 } = context;
     const { note, updateNote } = props;
     setInterval(() => {
-        console.log("imp" + post1.value);
+        console.log("imp   " + post1);
         
-    }, 10);
+    }, 1);
     return (
         <>
        
@@ -27,7 +27,7 @@ const Noteitem = (props) => {
       </div>
      </div>
 
-    {post1 && <h1>loading..</h1>}
+  
      </>
     )
 }

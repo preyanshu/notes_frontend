@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Notes = (props) => {
     const context = useContext(noteContext);
-    const { notes, getNotes,editNote } = context;
+    const { editNote } = context;
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -37,8 +37,69 @@ const Notes = (props) => {
     const onChange = (e)=>{
         setNote({...note, [e.target.name]: e.target.value})
     }
-    console.log("notes")
-    console.log(notes)
+   
+
+
+
+
+
+
+
+    const host = "https://backend-jiu4.onrender.com"
+
+  
+    const notesInitial = []
+    const [post1,setPost]=useState(false)
+    // useEffect
+  
+  // console.log("yo"+post1.value)
+    
+    
+    const [notes, setNotes] = useState(notesInitial)
+  
+    // Get all Notes
+    const getNotes = async() => {
+        setPost(true);
+      
+      
+        // API Call 
+  
+        
+          await fetch(`${host}/api/notes/fetchallnotes`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              "auth-token": localStorage.getItem("token")
+            }
+          }).then((data)=>{
+            return data.json()
+      
+      
+          }).then((json)=>{
+            // const json = await response.json()
+          console.log(json)
+         setNotes(json)
+          
+          setPost(false)
+           
+           
+      
+          });
+          
+        
+       
+     
+      
+        
+        
+      
+      
+      
+      
+     
+      
+     
+    }
 
     return (
         <>
@@ -72,7 +133,7 @@ const Notes = (props) => {
                         </div>
                         <div className="modal-footer">
                        < button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button disabled={note.etitle.length<5 || note.edescription.length<5} onClick={handleClick} type="button" className="btn btn-primary">Update Note</button>
+                            <button disabled={note.etitle.length<1 || note.edescription.length<5} onClick={handleClick} type="button" className="btn btn-primary">Update Note</button>
                         </div>
                     </div>
                 </div>
@@ -80,12 +141,19 @@ const Notes = (props) => {
 
             
             <div className="row my-3">
-                <h2>You Notes</h2>
 
-                {notes.map((note) => {
+            <h2>You Notes</h2>
+          
+          
+          <div className="container text-center mt-30">{post1 && <img src="Rolling-1s-200px (1).gif " className='mt-3 mb-3' height="75px" width="75px"/>} </div>
+
+                   {notes.map((note) => {
                     return (<Noteitem key={note._id} updateNote={updateNote} note={note} showAlert={props.showAlert}/>)
                 })}
+                
+               
             </div>
+            
         </>
     )
 }
