@@ -4,8 +4,8 @@ import noteContext from "../context/notes/noteContext"
 
 const Noteitem = (props) => {
     const context = useContext(noteContext);
-    const  { deleteNote,post1 } = context;
-    const { note, updateNote } = props;
+    const  {post1 } = context;
+    const { note, updateNote,deleteNote } = props;
     setInterval(() => {
         console.log("imp   " + post1);
         

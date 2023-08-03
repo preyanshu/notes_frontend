@@ -5,11 +5,13 @@ import {useNavigate} from 'react-router-dom';
 const Signup = (props) => {
     const {showAlert}=props
     const [credentials, setCredentials] = useState({name:"",email: "", password: "",cpassword:""}) 
+    const [loading, setloading] = useState(false) 
     
     let navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setloading(true);
         const response = await fetch("https://backend-jiu4.onrender.com/api/auth/signup", {
             method: 'POST',
             headers: {
@@ -18,6 +20,7 @@ const Signup = (props) => {
             body: JSON.stringify({name:credentials.name,email: credentials.email, password: credentials.password})
         });
         const json = await response.json()
+        setloading(false)
         console.log(json);
         if (json.success){
             // Save the auth token and redirect
@@ -40,8 +43,10 @@ const Signup = (props) => {
 
   return (
     <div className='container'>
-            <h1 className='text-center pb-3'>Signup</h1>
-            <form  onSubmit={handleSubmit}>
+        {!loading &&  <h1 className='text-center pb-3'>Signup</h1>}
+           
+            {loading && <h1 className='text-center'>LOADING..</h1>}
+            {!loading && <form  onSubmit={handleSubmit}>
             <div className="mb-3">
                     <label htmlFor="name" className="form-label">Name</label>
                     <input type="text" className="form-control" value={credentials.name} onChange={onChange} id="name" name="name" aria-describedby="emailHelp" />
@@ -62,7 +67,8 @@ const Signup = (props) => {
                 </div>
 
                 <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+            </form>}
+            
         </div>
   )
 }

@@ -46,7 +46,6 @@ const NoteState = (props) => {
         console.log(json)
        setNotes(json)
         
-        setPost(false)
          
          
     
@@ -66,6 +65,11 @@ const NoteState = (props) => {
     
    
   }
+  useEffect(()=>{
+    getNotes();
+    
+
+  },[])
 
   // Add a Note
   const addNote = async (title, description, tag) => {
@@ -98,6 +102,8 @@ const NoteState = (props) => {
 
   // Delete a Note
   const deleteNote = async (id) => {
+    console.log(notes)
+    console.log("hi")
     // API Call
     const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
       method: 'DELETE',
